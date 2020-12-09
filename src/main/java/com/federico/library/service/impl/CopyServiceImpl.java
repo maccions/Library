@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
+import org.springframework.stereotype.Service;
 
 import com.federico.library.entity.Book;
 import com.federico.library.entity.BookShelf;
@@ -17,6 +18,7 @@ import com.federico.library.service.BookService;
 import com.federico.library.service.BookShelfService;
 import com.federico.library.service.CopyService;
 
+@Service
 public class CopyServiceImpl implements CopyService {
 
 	@Autowired
