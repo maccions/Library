@@ -33,7 +33,7 @@ public class BookShelfServiceImpl implements BookShelfService {
 		String room = bookShelf.getRoom();
 		String col = bookShelf.getShelfColumn();
 		String row = bookShelf.getShelfRow();
-		if ((Strings.isBlank(room) && Strings.isBlank(col) && Strings.isBlank(row))) {
+		if ((Strings.isBlank(room) || Strings.isBlank(col) || Strings.isBlank(row))) {
 			throw new BookShelfException("Missing bookshelf data", ErrorType.MISSING_PARAMETER);
 		}
 		checkBookShelfDataExistence(room, col, row);
