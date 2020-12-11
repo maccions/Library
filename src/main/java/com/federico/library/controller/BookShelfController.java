@@ -2,6 +2,8 @@ package com.federico.library.controller;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,15 +24,21 @@ import com.federico.library.service.BookShelfService;
 @RestController
 @RequestMapping("/bookShelf")
 public class BookShelfController {
-
+	
+	Logger log = LoggerFactory.getLogger(this.getClass());
+	
 	@Autowired
 	private BookShelfService bookShelfService;
 	
 	@PostMapping
 	public ResponseEntity<?> createBookShelf(@RequestBody BookShelf bookShelf) {
+		log.info(bookShelf.toString());
 		try {
-			return new ResponseEntity<>(bookShelfService.addBookShelf(bookShelf), HttpStatus.OK);
+			bookShelf = bookShelfService.addBookShelf(bookShelf);
+			log.info("bookshelf added: {}", bookShelf);
+			return new ResponseEntity<>(bookShelf, HttpStatus.OK);
 		} catch (BookShelfException e) {
+			log.warn("{} - {} - {}", e.getError(), e.getDescription(), bookShelf);
 			return new ResponseEntity<>(new ErrorDTO(e.getDescription(), e.getError()), HttpStatus.BAD_REQUEST);
 		}
 	}

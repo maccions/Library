@@ -33,4 +33,10 @@ public class BookShelf {
 	@Column (nullable = false)
 	private String shelfRow;
 
+	@Override
+	public String toString() {
+		return "BookShelf [id=" + id + ", room=" + room + ", shelfColumn=" + shelfColumn + ", shelfRow=" + shelfRow
+				+ "]";
+	}
+
 }
